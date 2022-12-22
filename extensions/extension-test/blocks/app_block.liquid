@@ -1,0 +1,49 @@
+<span style="color: {{ block.settings.color }}">
+  {% comment %} <h1>{{ shop.name }}</h1> {% endcomment %}
+  <br/>
+  <nav class="customNav">
+    {% for link in linklists.main-menu.links -%}
+      <li>{{ link.title | link_to: link.url }}</li>
+    {%- endfor %}
+  </nav>
+</span>
+
+{% comment %} JSON //----------------------------------------------------------------------------------------------------------------- {% endcomment %}
+
+{% render "app_snippet" %}
+{% schema %}
+  {
+    "name": "Hello World",
+    "target": "section",
+    "stylesheet": "app.css",
+    "javascript": "app.js",
+    "settings": [
+      {
+        "label": "Color",
+        "id": "color",
+        "type": "color",
+        "default": "#000000"
+      }
+    ]
+  }
+{% endschema %}
+
+{% comment %} CSS //----------------------------------------------------------------------------------------------------------------- {% endcomment %}
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+  }
+  .customNav {
+    display: flex;
+    justify-content: space-between;
+    background-color: red;
+  }
+
+  .customNav li {
+    color: blue;
+  }
+</style>
