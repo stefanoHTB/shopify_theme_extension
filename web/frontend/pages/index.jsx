@@ -24,7 +24,7 @@ export default function HomePage() {
           </Card>
         </Layout.Section>
       </Layout>
-      {/* <TitleBar title="App name" primaryAction={null} />
+      <TitleBar title="App name" primaryAction={null} />
       <Layout>
         <Layout.Section>
           <Card sectioned>
@@ -87,7 +87,7 @@ export default function HomePage() {
         <Layout.Section>
           <ProductsCard />
         </Layout.Section>
-      </Layout> */}
+      </Layout>
     </Page>
   );
 }

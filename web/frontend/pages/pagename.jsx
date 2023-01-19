@@ -3,6 +3,15 @@ import { TitleBar } from "@shopify/app-bridge-react";
 
 
 export default function PageName() {
+
+  const fetchOrders = async () => {
+
+    const response = await fetch("/api/orders");
+
+    console.log(await response.json())
+  }
+  
+  fetchOrders()
  
   //--------------------------------------------------------
   return (
@@ -42,6 +51,7 @@ export default function PageName() {
             <Heading>Heading</Heading>
             <TextContainer>
               <p>Body</p>
+              <h1>hello</h1>
             </TextContainer>
           </Card>
         </Layout.Section>

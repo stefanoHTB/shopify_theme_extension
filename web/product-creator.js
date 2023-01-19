@@ -120,3 +120,30 @@ function randomTitle() {
 function randomPrice() {
   return Math.round((Math.random() * 10 + Number.EPSILON) * 100) / 100;
 }
+
+//-----------------------------------------------------------------------------
+
+// const FETCH_ORDERS_QUERY = `{
+//   orders(first: 10) {
+//     edges {
+//       node {
+//         id
+//       }
+//     }
+//   }
+// }`
+
+
+
+//  async function fetchOr(session) {
+//   const client = new shopify.api.clients.Graphql({ session });
+
+//   const res = await client.query({
+//       data: {
+//           query: FETCH_ORDERS_QUERY
+//       }
+//   })
+
+//   return res 
+
+// }

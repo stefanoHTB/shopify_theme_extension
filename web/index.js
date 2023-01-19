@@ -34,12 +34,100 @@ app.use("/api/*", shopify.validateAuthenticatedSession());
 
 app.use(express.json());
 
+//-------------------------------------------------------------------------------------
+const FETCH_ORDERS_QUERY = `{
+  orders(first: 10) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}`
+
+
+
+ async function fetchOr(session) {
+  const client = new shopify.api.clients.Graphql({ session });
+
+  const res = await client.query({
+      data: {
+          query: FETCH_ORDERS_QUERY
+      }
+  })
+
+  return res 
+
+}
+
+//---------------------------------------------------------------------------------------
+
+const FETCH_PRODUCTS_QUERY = `{
+  products(first:10) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}`
+
+ async function fetchProducts(session) {
+  const client = new shopify.api.clients.Graphql({ session });
+
+  const res = await client.query({
+      data: {
+          query: FETCH_PRODUCTS_QUERY
+      }
+  })
+
+  return res 
+
+}
+
+//---------------------------------------------------------------------------
+
+
+app.get("/api/products", async (req, res) => {
+ 
+
+  const products = await fetchProducts(res.locals.shopify.session)
+
+  res.status(200).send({products})
+
+})
+
+//------------------------------------------------------------------------------------------------------- 
+
+app.get("/api/locations", async (req, res) => {
+
+
+  // const listOrders = await shopify.api.rest.Order.all({
+  //   session: res.locals.shopify.session,
+  //   status: "any",
+  // });
+
+  const locations = await shopify.api.rest.Location.all({
+    session: res.locals.shopify.session,
+  });
+
+  // const listOrders = await fetchOr(res.locals.shopify.session)
+  
+  res.status(200).send(locations);
+  console.log(locations)
+})
+
+//--------------------------------------------------------------------------------------------------------
+
 app.get("/api/products/count", async (_req, res) => {
   const countData = await shopify.api.rest.Product.count({
     session: res.locals.shopify.session,
   });
   res.status(200).send(countData);
 });
+
+//-------------------------------------------------------------------------------------------------------
 
 app.get("/api/products/create", async (_req, res) => {
   let status = 200;
@@ -54,6 +142,8 @@ app.get("/api/products/create", async (_req, res) => {
   }
   res.status(status).send({ success: status === 200, error });
 });
+
+//---------------------------------------------------------------------------------------------------------
 
 app.use(serveStatic(STATIC_PATH, { index: false }));
 

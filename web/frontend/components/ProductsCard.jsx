@@ -48,6 +48,28 @@ export function ProductsCard() {
       });
     }
   };
+  //---------------------------------
+
+  const fetchProducts = async () => {
+
+    setIsLoading(true);
+    const response = await fetch("/api/products");
+    setIsLoading(false);
+
+    console.log(await response.json())
+  }
+
+  const fetchOrders = async () => {
+
+    setIsLoading(true);
+    const response = await fetch("/api/locations");
+    setIsLoading(false);
+
+    console.log(await response.json())
+  }
+
+  fetchOrders()
+
 
   return (
     <>

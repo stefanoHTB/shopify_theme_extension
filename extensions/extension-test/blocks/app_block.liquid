@@ -1,10 +1,27 @@
 <span style="color: {{ block.settings.color }}">
   {% comment %} <h1>{{ shop.name }}</h1> {% endcomment %}
   <br/>
-  <nav class="customNav">
-    {% for link in linklists.main-menu.links -%}
-      <li>{{ link.title | link_to: link.url }}</li>
-    {%- endfor %}
+  <nav>
+    <div class="customNav">
+      {% for link in linklists.main-menu.links %}
+        {% if link.links.size == 0 %}
+          <li>{{ link.title | link_to: link.url }}</li>
+        {% else %}
+          <a
+            href="{{ link.url }}"
+            class="nav-bar__link link"
+            role="menuitem"
+            aria-expanded="false"
+            aria-haspopup="true">
+            {{- link.title -}}
+            {%- render 'icon', icon: 'arrow-bottom' -%}
+            {%- render 'icon', icon: 'nav-triangle' -%}
+          </a>
+
+        {% endif %}
+      {% endfor %}
+    </div>
+
   </nav>
 </span>
 
@@ -36,14 +53,24 @@
     padding: 0;
     text-decoration: none;
     list-style: none;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   .customNav {
     display: flex;
     justify-content: space-between;
-    background-color: red;
+    padding-top: 100px;
   }
 
-  .customNav li {
-    color: blue;
+  .customNav li:hover {
+    background-color: blue;
+  }
+
+  .customNav li:visited {
+    color: black;
+  }
+
+  @media(max-width: 500px) {
+    .customNav {}
   }
 </style>

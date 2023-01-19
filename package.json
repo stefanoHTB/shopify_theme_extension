@@ -15,5 +15,15 @@
     "@shopify/app": "3.29.0",
     "@shopify/cli": "3.29.0"
   },
-  "author": "danluck"
+  "author": "danluck",
+  "description": "This is a template for building a [Shopify app](https://shopify.dev/apps/getting-started) using Node and React. It contains the basics for building a Shopify app.",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanoHTB/shopify_theme_extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stefanoHTB/shopify_theme_extension/issues"
+  },
+  "homepage": "https://github.com/stefanoHTB/shopify_theme_extension#readme"
 }
